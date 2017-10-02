@@ -3,3 +3,4 @@ function multiply(number) {
 }
 
 console.log(multiply(3));
+console.log(multiply(5));
