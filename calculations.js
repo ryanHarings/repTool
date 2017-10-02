@@ -2,4 +2,4 @@ function multiply(number) {
   return number * number;
 }
 
-console.log(multiple(3));
+console.log(multiply(3));
