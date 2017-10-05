@@ -3,14 +3,14 @@ function createList(effObject) {
     var bID = 1;
     if (key === "L6A35") {
       bID = 2;
-    } else if (key.slice(0,1) === "E" || key.slice(0,3) === "L6A" || key.slice(0,1) === "F" || key.slice(0,2) === "LF") {
+    } else if (key.slice(0,1) === "E" || key.slice(0,3) === "L6A" || key.slice(0,1) === "F") {
       bID = 1;
     };
     $('.linear').append('<div class="fixture hover" name="' + key + '"value="' + bID + '" data-family="LIN">' + key + '</div>');
   });
   Object.keys(effObject.TRO).forEach(function(key) {
     var bID = 1;
-    if (key.slice(0,1) === "E" || key.slice(0,3) === "L6A" || key.slice(0,1) === "F" || key.slice(0,2) === "LF") {
+    if (key.slice(0,2) === "CJ" || key.slice(0,1) === "F" || key.slice(0,2) === "LF") {
       bID = 1;
     } else {
       bID = 3;
@@ -86,76 +86,87 @@ $('.fixture').click(function(){
 });
 
 function getUL() {
+  console.log(selection);
   var fixture = selection.fixture;
-  if (fixture.split('A')[0] !== fixture) {
-    fixture = fixture.split('A')[0]
-  } else {
-    fixture = fixture.split('_')[0];
-  }
 
-  if (selection.shielding === 'WW') {
-    selection.ul = ulW['EWW'];
+  if (fixture.split('A')[0] !== fixture && selection.family === 'LIN') {
+    fixture = fixture.split('A')[0];
+  } else if (selection.shielding === 'WW') {
+      fixture = 'EWW';
   } else if (selection.shielding === 'WG') {
-    selection.ul = ulW['EWG'];
+      fixture = 'EWG';
+  } else if (fixture === 'EVL' || fixture === 'EX33' || fixture === 'EX44') {
+      fixture = fixture.split('_')[0];
+  } else if (!fixture.includes('12') && !fixture.includes('B') && fixture.includes('1') && selection.family === 'LIN') {
+      fixture = 'E1';
+  } else if (fixture.includes('1') && fixture !== fixture.split('_')[0]) {
+    fixture = fixture.split('_')[0];
+  } else if (fixture.includes('B') && !fixture.includes('1') || selection.family === 'TRO') {
+    if (selection.shielding === 'WET') {
+      fixture = 'EWB'
+    } else if (selection.family === 'TRO') {
+      fixture = fixture.split('B')[0];
+    } else {
+      fixture = 'EX';
+    }
   } else if (selection.shielding === 'WET') {
-    if (fixture.slice(fixture.length - 1) === 'B') {
-      selection.ul = ulW['EWB'];
-    } else {
-      selection.ul = ulW['EW'];
+    fixture = 'EW';
+  } else if (fixture !== fixture.split('_')[0]) {
+      fixture = fixture.split('_')[0];
+  } else if (!fixture.includes('12')) {
+    if (fixture.includes('X')) {
+      fixture = 'EX';
+    } else if (fixture.slice(0,1)[0] === 'E' && !fixture.includes('12')) {
+        fixture = 'EV';
     }
-  } else if (fixture !== 'L6' && selection.shielding !== 'WET' && fixture !== 'EX33' && fixture !== 'EX44' && fixture !== 'EX1B' && fixture !== 'EV1' && fixture !== 'EVL' && fixture !== 'EX12'  && fixture !== 'EX1') {
-    if (!fixture.includes('X')) {
-      selection.ul = ulW['EV'];
-    } else {
-      selection.ul = ulW['EX'];
-    }
-  } else if (fixture === 'EX1' || fixture === 'EV1') {
-    selection.ul = ulW['E1'];
-  } else if (fixture === 'EX33' || fixture === 'EX44') {
-    console.log(fixture);
-    selection.ul = ulW[fixture];
-  } else {
-    selection.ul = ulW[fixture];
-  }
+  };
 
+  console.log(fixture);
+
+  selection.ul = ulW[fixture];
+  console.log(selection.ul);
 };
 
 function getOutput(fixObject) {
-  var boardData = fixObject.boardType === "1" ? barLineArea : fixObject.boardType === "2" ? linero22 : line22;
+  if (fixObject.family === 'LIN') {
+    var boardData = fixObject.boardType === "1" ? barLineArea : fixObject.boardType === "2" ? linero22 : line22;
 
-  var boardMin = boardData[0];
-  var boardMax;
-  var maxBoardLumen;
-  var minBoardLumen;
+    var boardMin = boardData[0];
+    var boardMax;
+    var maxBoardLumen;
+    var minBoardLumen;
 
-  Object.keys(boardData).forEach(function(key) {
-    if (Number(boardData[key].inputWattage) < Number(fixObject.ul)) {
-      boardMax = boardData[key];
-      maxBoardLumen = Number(boardMax[fixObject.color]);
-      minBoardLumen = Number(boardMin[fixObject.color]);
+    Object.keys(boardData).forEach(function(key) {
+      if (Number(boardData[key].inputWattage) < Number(fixObject.ul)) {
+        boardMax = boardData[key];
+        maxBoardLumen = Number(boardMax[fixObject.color]);
+        minBoardLumen = Number(boardMin[fixObject.color]);
+      }
+    });
+
+    var fixEff = Number(fixObject.eff);
+
+    var shieldCheck = fixObject.shielding === "NA" ? ' ' : fixObject.shielding;
+
+    var criX = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
+
+    var outputObject = {};
+
+    if (Number(fixObject.boardType) < 3) {
+      outputObject.catolog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
+      outputObject.maxLumen = Math.round10(fixEff * maxBoardLumen * criX, 1);
+      outputObject.minLumen = Math.round10(fixEff * minBoardLumen * criX, 1);
+      outputObject.maxWatt = Math.round10(boardMax["inputWattage"], -1);
+      outputObject.minWatt = Math.round10(boardMin["inputWattage"], -1);
+    } else {
+      console.log('oops, not ready');
     }
-  });
 
-  var fixEff = Number(fixObject.eff);
+    return outputObject;
 
-  var shieldCheck = fixObject.shielding === "NA" ? ' ' : fixObject.shielding;
-
-  var criX = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
-
-  var outputObject = {};
-
-  if (Number(fixObject.boardType) < 3) {
-    outputObject.catolog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
-    outputObject.maxLumen = Math.round10(fixEff * maxBoardLumen * criX, 1);
-    outputObject.minLumen = Math.round10(fixEff * minBoardLumen * criX, 1);
-    outputObject.maxWatt = Math.round10(boardMax["inputWattage"], -1);
-    outputObject.minWatt = Math.round10(boardMin["inputWattage"], -1);
   } else {
-    console.log('oops, not ready');
-  }
 
-  return outputObject;
-
+  };
 };
 
 (function() {

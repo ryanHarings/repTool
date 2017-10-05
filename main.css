@@ -12,7 +12,7 @@ code {
 }
 
 .fixtures, .shielding, .led, .output {
-  border-left: 1px solid black;
+  border-left: 3px solid black;
   padding: 15px;
 }
 
@@ -22,7 +22,7 @@ article > p:first-child, div > p:first-child {
 }
 
 .color {
-  padding-top: 15px;
+  padding-top: 30px;
 }
 
 button {
