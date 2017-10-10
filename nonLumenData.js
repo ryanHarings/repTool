@@ -19,15 +19,15 @@ const ulW = {
   F48: 249,
   F60: 251,
   F72: 380,
-  AD11: 25, //guess
+  AD11: 25, //roughly
   AD22: 40,
   AD14: 40,
   AD24: 80,
-  CJ11: 40, //guess
+  CJ11: 40, //roughly
   CJ22: 40,
   CJ14: 40,
   CJ24: 80,
-  LU11: 25, //guess
+  LU11: 25, //roughly
   LU22: 40,
   LU14: 40,
   LU24: 80,
