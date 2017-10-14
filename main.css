@@ -21,7 +21,7 @@ article > p:first-child, div > p:first-child {
   padding-bottom: 10px;
 }
 
-.color {
+.color, .shielding > .second {
   padding-top: 30px;
 }
 

@@ -25,17 +25,35 @@ var selection = {};
 var clickCount = 0;
 
 $('.fixture').click(function(){
-  $('.shielding').empty();
+  selection = {};
+  $('.shielding > .first').empty();
+  $('.shielding > .second').empty();
+  $('.shielding > p').empty();
   $('.board').empty();
   $('.color').empty();
-  $('.shielding').append('<p>Shielding</p>');
+  $('.shielding').prepend('<p>Shielding</p>');
   $('div').removeClass('selected');
   $(this).addClass('selected');
-  selection.fixture = $(this).attr('name');
   selection.boardType = $(this).attr('value');
   selection.family = $(this).attr('data-family');
+  selection.fixture = $(this).attr('name');
+  if ($(this).attr('name').split('B_')[0] !== $(this).attr('name')) {
+    if ($(this).attr('name').split('B_')[1] === "DIR") {
+      selection.altFixture = $(this).attr('name').split('B_')[0] + 'B_IND';
+    } else if ($(this).attr('name').split('B_')[1] === "IND") {
+      selection.altFixture = $(this).attr('name').split('B_')[0] + 'B_DIR';
+    }
+  }
+  if ($(this).attr('name').split('B_')[0] !== $(this).attr('name')) {
+    $('.shielding > .first').append('<p>' + selection.fixture.split('B_')[1] + '</p>');
+    $('.shielding > .second').append('<p>' + selection.altFixture.split('B_')[1] + '</p>');
+    Object.keys(fixEff[selection.family][selection.altFixture]).forEach(function(key) {
+      $('.shielding > .second').append('<div class="altLens hover" name="' + key + '" value="' + fixEff[selection.family][selection.altFixture][key] + '">' + key + '</div>')
+    });
+  };
+
   Object.keys(fixEff[selection.family][selection.fixture]).forEach(function(key) {
-    $('.shielding').append('<div class="lens hover" name="' + key + '" value="' + fixEff[selection.family][selection.fixture][key] + '">' + key + '</div>')
+    $('.shielding > .first').append('<div class="lens hover" name="' + key + '" value="' + fixEff[selection.family][selection.fixture][key] + '">' + key + '</div>')
   });
 
   $('.lens').click(function() {
@@ -49,6 +67,13 @@ $('.fixture').click(function(){
     getUL();
     $('.board').append('<div class="cri hover" name="80">80</div>');
     $('.board').append('<div class="cri hover" name="90">90</div>');
+
+    $('.altLens').click(function() {
+      $(this).siblings().removeClass('selected');
+      $(this).addClass('selected');
+      selection.altShielding = $(this).attr('name');
+      selection.altEff = $(this).attr('value');
+    })
 
     $('.cri').click(function() {
       $('.color').empty();
@@ -71,10 +96,16 @@ $('.fixture').click(function(){
         $(this).addClass('selected');
         selection.color = $(this).attr('name');
         var outputData = getOutput(selection);
-        $('.output').append('<div class="btn' + clickCount + '">Catolog #: ' + outputData.catolog + '</div>');
+        $('.output').append('<div class="btn' + clickCount + '">Catolog #: ' + outputData.catalog + '</div>');
         $('.output').append('<div class="btn' + clickCount + '">Max Lumen: ' + outputData.maxLumen + '</div>');
+        if (outputData.altMaxLumen) {
+          $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Lumen: ' + outputData.altMaxLumen + '</div>');
+        };
         $('.output').append('<div class="btn' + clickCount + '">Min Lumen: ' + outputData.minLumen + '</div>');
         $('.output').append('<div class="btn' + clickCount + '">Max Watt: ' + outputData.maxWatt + '</div>');
+        if (outputData.altMaxWatt) {
+          $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Watt: ' + outputData.altMaxWatt + '</div>');
+        };
         $('.output').append('<div class="btn' + clickCount + '">Min Watt: ' + outputData.minWatt + '</div>');
         $('.output').append('<button class="btn' + clickCount + '">X</button>');
 
@@ -123,7 +154,6 @@ function getUL() {
   };
 
   selection.ul = ulW[fixture];
-  console.log(selection.ul);
 };
 
 function getOutput(fixObject) {
@@ -136,14 +166,18 @@ function getOutput(fixObject) {
   var criX = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
 
   var boardMin = boardData[0];
+  var boardMax;
+  var maxBoardLumen;
+  var minBoardLumen;
 
   var outputObject = {};
 
-  if (fixObject.family === 'LIN') {
+  var altWatts;
+  var altBoardMax;
+  var altMaxBoardLumen;
+  var altMinBoardLumen;
 
-    var boardMax;
-    var maxBoardLumen;
-    var minBoardLumen;
+  if (fixObject.family === 'LIN') {
 
     Object.keys(boardData).forEach(function(key) {
       if (Number(boardData[key].inputWattage) < Number(fixObject.ul)) {
@@ -153,19 +187,29 @@ function getOutput(fixObject) {
       }
     });
 
-    outputObject.catolog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
+    if (fixObject.altFixture) {
+      altWatts = Number(fixObject.ul) - Number(boardMax['inputWattage']);
+      Object.keys(boardData).forEach(function(key) {
+        if (Number(boardData[key].inputWattage) < altWatts) {
+          altBoardMax = boardData[key];
+          altMaxBoardLumen = Number(altBoardMax[fixObject.color]);
+        }
+      });
+      var altFixEff = Number(fixObject.altEff);
+
+      outputObject.altMaxLumen = Math.round10(altFixEff * altMaxBoardLumen * criX, 1);
+      outputObject.altMaxWatt = Math.round10(altBoardMax['inputWattage'], -1);
+
+    };
+
+    outputObject.catalog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
     outputObject.maxLumen = Math.round10(fixEff * maxBoardLumen * criX, 1);
     outputObject.minLumen = Math.round10(fixEff * minBoardLumen * criX, 1);
-    outputObject.maxWatt = Math.round10(boardMax["inputWattage"], -1);
-    outputObject.minWatt = Math.round10(boardMin["inputWattage"], -1);
-
-    return outputObject;
+    outputObject.maxWatt = Math.round10(boardMax['inputWattage'], -1);
+    outputObject.minWatt = Math.round10(boardMin['inputWattage'], -1);
 
   } else {
     var boardCount = fixBoardCounts[fixObject.fixture];
-    var boardMax;
-    var maxBoardLumen;
-    var minBoardLumen;
     var driverEff;
     var fixWatt;
     var totalmA;
@@ -251,15 +295,17 @@ function getOutput(fixObject) {
     console.log(boardMax);
     console.log(totalmA);
 
-    outputObject.catolog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
+    outputObject.catalog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
     outputObject.maxLumen = fixObject.fixture.slice(0,1) === 'F' ? 'Please see spec sheet for max lumens' : Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1);
     outputObject.minLumen = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1);
     outputObject.maxWatt = Math.round10(fixWatt, -1);
-    outputObject.minWatt = Math.round10(boardMin["inputWattage"] * boardCount, -1);
-
-    return outputObject;
+    outputObject.minWatt = Math.round10(boardMin['inputWattage'] * boardCount, -1);
 
   };
+
+  console.log(criX);
+
+  return outputObject;
 };
 
 (function() {

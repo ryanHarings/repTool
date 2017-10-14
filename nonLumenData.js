@@ -23,7 +23,7 @@ const ulW = {
   AD22: 40,
   AD14: 40,
   AD24: 80,
-  CJ11: 40, //roughly
+  CJ11: 25, //roughly
   CJ22: 40,
   CJ14: 40,
   CJ24: 80,
