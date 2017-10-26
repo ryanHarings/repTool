@@ -101,12 +101,12 @@ $('.fixture').click(function(){
         if (outputData.altMaxLumen) {
           $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Lumen: ' + outputData.altMaxLumen + '</div>');
         };
-        $('.output').append('<div class="btn' + clickCount + '">Min Lumen: ' + outputData.minLumen + '</div>');
+        $('.output').append('<div class="btn' + clickCount + '">Min: ' + outputData.minLumen + ' lumens @ ' + outputData.minWatt + ' watts</div>');
         $('.output').append('<div class="btn' + clickCount + '">Max Watt: ' + outputData.maxWatt + '</div>');
         if (outputData.altMaxWatt) {
           $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Watt: ' + outputData.altMaxWatt + '</div>');
         };
-        $('.output').append('<div class="btn' + clickCount + '">Min Watt: ' + outputData.minWatt + '</div>');
+        // $('.output').append('<div class="btn' + clickCount + '">Min Watt: ' + outputData.minWatt + '</div>');
         $('.output').append('<button class="btn' + clickCount + '">X</button>');
 
         $('button').click(function() {
