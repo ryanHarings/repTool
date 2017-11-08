@@ -1,4 +1,7 @@
 function createList(effObject) {
+  $('.switch').hide();
+  $('.input-field').hide();
+  $('.clButton').hide();
   Object.keys(effObject.LIN).forEach(function(key) {
     var bID = 1;
     if (key === "L6A35") {
@@ -21,11 +24,57 @@ function createList(effObject) {
 createList(fixEff);
 
 var selection = {};
-
 var clickCount = 0;
+var buttonNum;
+
+$('.lever').click(function() {
+  if ($("#unitSwitch").prop("checked") === false) {
+    selection.customUnit = 'Watts';
+  } else {
+    selection.customUnit = 'Lumens';
+  }
+
+  $('.customTarget').text('Custom ' + selection.customUnit + ' (optional):');
+  $('.customTarget2').text('Custom ' + selection.customUnit + ' (optional):');
+  var butUnit = selection.customUnit === 'Lumens' ? 'L' : 'W';
+  $('.clButton').text('Add C' + butUnit);
+});
+
+$('button.clButton').click(function() {
+  selection.customTarget = $('#customTarget').val();
+  $('#customTarget').val([]);
+  selection.altCustomTarget = $('#customTarget2').val();
+  $('#customTarget2').val([]);
+  var unitMaxSelection = eval('selection.max' + selection.customUnit);
+  var unitMinSelection = eval('selection.min' + selection.customUnit);
+  var unitAltMaxSelection = eval('selection.altMax' + selection.customUnit);
+
+  if (Number(selection.customTarget) > Number(unitMaxSelection) || Number(selection.customTarget) < Number(unitMinSelection) || Number(selection.altCustomTarget) > Number(unitAltMaxSelection)) {
+    $('.' + buttonNum + ' .customMessage span').text('Custom value is out of range, see above.');
+  } else {
+    $('.switch').hide();
+    $('.input-field').hide();
+    $('.clButton').hide();
+    $('.temp').removeClass('selected');
+
+    var customOutput = getCustomOutput(selection);
+
+    $('.' + buttonNum + ' .customMessage span').text(customOutput.customOutput);
+    $('.' + buttonNum + ' .customProg').text(customOutput.customProg);
+    if (selection.altFixture) {
+      $('.' + buttonNum + ' .altCustomMessage').text(customOutput.altCustomOutput);
+      $('.' + buttonNum + ' .altCustomProg').text(customOutput.altCustomProg);
+    };
+  }
+});
 
 $('.fixture').click(function(){
   selection = {};
+  selection.customUnit = $("#unitSwitch").prop("checked") === true ? 'Watts' : 'Lumens';
+  $('#customTarget').val([]);
+  $('.switch').hide();
+  $('.input-field').hide();
+  $('.clButton').hide();
   $('.shielding > .first').empty();
   $('.shielding > .second').empty();
   $('.shielding > p').empty();
@@ -57,25 +106,51 @@ $('.fixture').click(function(){
   });
 
   $('.lens').click(function() {
+    // document.getElementById("unitSwitch").checked = false;
+    $('#customTarget').val([]);
+    $('.switch').hide();
+    $('.input-field').hide();
+    $('.clButton').hide();
     $('.board').empty();
     $('.color').empty();
-    $('.board').prepend('<p>CRI</p>');
+
+    if ($('.altLens').length === 0) {
+      $('.board').prepend('<p>CRI</p>');
+      $('.board').append('<div class="cri hover" name="80">80</div>');
+      $('.board').append('<div class="cri hover" name="90">90</div>');
+    };
+
     $(this).siblings().removeClass('selected');
+    $('.altLens').removeClass('selected');
+
     $(this).addClass('selected');
     selection.shielding = $(this).attr('name');
     selection.eff = $(this).attr('value');
-    getUL();
-    $('.board').append('<div class="cri hover" name="80">80</div>');
-    $('.board').append('<div class="cri hover" name="90">90</div>');
 
     $('.altLens').click(function() {
       $(this).siblings().removeClass('selected');
       $(this).addClass('selected');
       selection.altShielding = $(this).attr('name');
       selection.altEff = $(this).attr('value');
-    })
 
-    $('.cri').click(function() {
+      $('#customTarget').val([]);
+      $('.switch').hide();
+      $('.input-field').hide();
+      $('.clButton').hide();
+      $('.board').empty();
+      $('.color').empty();
+
+      $('.board').prepend('<p>CRI</p>');
+      $('.board').append('<div class="cri hover" name="80">80</div>');
+      $('.board').append('<div class="cri hover" name="90">90</div>');
+    });
+    getUL();
+
+    $('div.board').on('click', '.cri', function() {
+
+      // document.getElementById("unitSwitch").checked = false;
+      $('#customTarget').val([]);
+
       $('.color').empty();
       $('.color').append('<p>Color</p>');
       $(this).siblings().removeClass('selected');
@@ -90,29 +165,55 @@ $('.fixture').click(function(){
       $('.color').append('<div class="temp hover" name="50k">50K</div>');
 
       $('.temp').click(function() {
+        // document.getElementById("unitSwitch").checked = false;
+        $('#customTarget').val([]);
+
+        $('.switch').show();
+        $('.customInput').show();
+        if (selection.altFixture) {
+          $('.customInput2').show();
+        };
+        $('.clButton').show();
         console.log('Well, hello there!');
         clickCount++;
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         selection.color = $(this).attr('name');
         var outputData = getOutput(selection);
-        $('.output').append('<div class="btn' + clickCount + '">Catolog #: ' + outputData.catalog + '</div>');
-        $('.output').append('<div class="btn' + clickCount + '">Max Lumen: ' + outputData.maxLumen + '</div>');
-        if (outputData.altMaxLumen) {
-          $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Lumen: ' + outputData.altMaxLumen + '</div>');
-        };
-        $('.output').append('<div class="btn' + clickCount + '">Min: ' + outputData.minLumen + ' lumens @ ' + outputData.minWatt + ' watts</div>');
-        $('.output').append('<div class="btn' + clickCount + '">Max Watt: ' + outputData.maxWatt + '</div>');
-        if (outputData.altMaxWatt) {
-          $('.output').append('<div class="btn' + clickCount + '">' + selection.altFixture.split('_')[1] + ' Max Watt: ' + outputData.altMaxWatt + '</div>');
-        };
-        // $('.output').append('<div class="btn' + clickCount + '">Min Watt: ' + outputData.minWatt + '</div>');
-        $('.output').append('<button class="btn' + clickCount + '">X</button>');
+        selection.maxLumens = outputData.maxLumens;
+        selection.minLumens = outputData.minLumens;
+        selection.maxWatts = outputData.maxWatts;
+        selection.minWatts = outputData.minWatts;
+        if (!isNaN(parseFloat(outputData.altMax))) {
+          selection.altMaxLumens = outputData.altMax;
+        }
+        buttonNum = 'btn' + clickCount;
 
-        $('button').click(function() {
-          var group = $(this).attr('class');
+        $('.output').append('<div class="' + buttonNum + ' outputCard"></div>');
+
+        $('.' + buttonNum).append('<div class=""><strong>' + outputData.catalog + '</strong></div>');
+
+        $('.' + buttonNum).append('<div class=""><strong>Max:</strong> ' + outputData.max + '</div>');
+        if (!isNaN(parseFloat(outputData.altMax))) {
+          $('.' + buttonNum).append('<div class=""><strong>' + selection.altFixture.split('_')[1] + ' Max (based on above output)</strong>:<br>' + outputData.altMax + '</div>');
+        };
+
+        $('.' + buttonNum).append('<div class=""><strong>Min:</strong> ' + outputData.min + '</div>');
+
+        $('.' + buttonNum).append('<div class="customMessage"><strong>Custom Output:</strong> <span>Must specify within above limits.</span></div>');
+        $('.' + buttonNum).append('<div class="customProg"></div>');
+        $('.' + buttonNum).append('<div class="altCustomMessage"></div>');
+        $('.' + buttonNum).append('<div class="altCustomProg"></div>');
+
+        $('.' + buttonNum).append('<button class="' + buttonNum + ' remove">Clear Config</button>');
+
+        $('button.remove').click(function() {
+          var group = $(this).attr('class').split(' ')[0];
           $('.' + group).remove();
         });
+
+
+
       });
     });
   });
@@ -158,10 +259,8 @@ function getUL() {
 
 function getOutput(fixObject) {
 
-  console.log(fixObject);
-
   var boardData = fixObject.boardType === "1" ? barLineArea : fixObject.boardType === "2" ? linero22 : line22;
-  var shieldCheck = fixObject.shielding === "NA" ? ' ' : fixObject.shielding;
+  var shieldCheck = fixObject.shielding === "NA" ? ' ' : fixObject.altShielding ? fixObject.shielding + ' ' + fixObject.altShielding : fixObject.shielding;
   var fixEff = Number(fixObject.eff);
   var criX = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
 
@@ -176,6 +275,8 @@ function getOutput(fixObject) {
   var altBoardMax;
   var altMaxBoardLumen;
   var altMinBoardLumen;
+  var altFixEff = Number(fixObject.altEff);
+
 
   if (fixObject.family === 'LIN') {
 
@@ -195,18 +296,19 @@ function getOutput(fixObject) {
           altMaxBoardLumen = Number(altBoardMax[fixObject.color]);
         }
       });
-      var altFixEff = Number(fixObject.altEff);
 
-      outputObject.altMaxLumen = Math.round10(altFixEff * altMaxBoardLumen * criX, 1);
-      outputObject.altMaxWatt = Math.round10(altBoardMax['inputWattage'], -1);
+      outputObject.altMax = Math.round10(altFixEff * altMaxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(altBoardMax['inputWattage'], -1) + ' W/ft';
+      // outputObject.altMaxWatt = Math.round10(altBoardMax['inputWattage'], -1);
 
     };
 
     outputObject.catalog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
-    outputObject.maxLumen = Math.round10(fixEff * maxBoardLumen * criX, 1);
-    outputObject.minLumen = Math.round10(fixEff * minBoardLumen * criX, 1);
-    outputObject.maxWatt = Math.round10(boardMax['inputWattage'], -1);
-    outputObject.minWatt = Math.round10(boardMin['inputWattage'], -1);
+    outputObject.max = Math.round10(fixEff * maxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMax['inputWattage'], -1) + ' W/ft';
+    outputObject.min = Math.round10(fixEff * minBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMin['inputWattage'], -1) + ' W/ft';
+    outputObject.maxLumens = Math.round10(fixEff * maxBoardLumen * criX, 1);
+    outputObject.minLumens = Math.round10(fixEff * minBoardLumen * criX, 1);
+    outputObject.maxWatts = Math.round10(boardMax['inputWattage'], -1);
+    outputObject.minWatts = Math.round10(boardMin['inputWattage'], -1);
 
   } else {
     var boardCount = fixBoardCounts[fixObject.fixture];
@@ -291,19 +393,166 @@ function getOutput(fixObject) {
       }
     });
 
-    console.log(driverEff);
-    console.log(boardMax);
-    console.log(totalmA);
-
     outputObject.catalog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
-    outputObject.maxLumen = fixObject.fixture.slice(0,1) === 'F' ? 'Please see spec sheet for max lumens' : Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1);
-    outputObject.minLumen = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1);
-    outputObject.maxWatt = Math.round10(fixWatt, -1);
-    outputObject.minWatt = Math.round10(boardMin['inputWattage'] * boardCount, -1);
+    outputObject.max = fixObject.fixture.slice(0,1) === 'F' ? 'Please see spec sheet for max lumens' : Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1) + ' lumens @ ' + Math.round10(fixWatt, -1) + ' watts';
+    outputObject.min = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1) + ' lumens @ ' + Math.round10(boardMin['inputWattage'] * boardCount, -1) + ' watts';
+    outputObject.maxLumens = Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1);
+    outputObject.minLumens = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1);
+    outputObject.maxWatts = Math.round10(fixWatt, -1);
+    outputObject.minWatts = Math.round10(boardMin['inputWattage'] * boardCount, -1);
 
   };
 
-  console.log(criX);
+  return outputObject;
+};
+
+function getCustomOutput(fixObject) {
+
+  var boardData = fixObject.boardType === "1" ? barLineArea : fixObject.boardType === "2" ? linero22 : line22;
+  var fixEff = Number(fixObject.eff);
+  var criX = fixObject.cri === '80' ? 1 : fixObject.color === '30k' ? .921 : fixObject.color === '35k' ? .899 : fixObject.color === '40k' ? .892 : fixObject.color === '50k' ? .892 : 1;
+
+  var custTarget = Number(fixObject.customTarget);
+  var altCustTarget = Number(fixObject.altCustomTarget);
+  var custUnit = fixObject.customUnit;
+
+  var boardMax;
+  var maxBoardLumen;
+
+  var outputObject = {};
+
+  var altInputWatts;
+  var altOutputWatts;
+  var altBoardMax;
+  var altMaxBoardLumen;
+  var altFixEff = Number(fixObject.altEff);
+
+  if (fixObject.family === 'LIN') {
+
+    Object.keys(boardData).forEach(function(key) {
+      var relevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) : Number(boardData[key][fixObject.color]) * fixEff;
+      var altRelevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) : Number(boardData[key][fixObject.color]) * altFixEff;
+      if (relevantBoardData <= custTarget) {
+        boardMax = boardData[key];
+        maxBoardLumen = Number(boardMax[fixObject.color]);
+      }
+      if (fixObject.altCustomTarget) {
+        if (altRelevantBoardData <= altCustTarget) {
+          altBoardMax = boardData[key];
+          altMaxBoardLumen = Number(altBoardMax[fixObject.color]);
+          altInputWatts = Number(altBoardMax['inputWattage']);
+          altOutputWatts = Number(altBoardMax['outputWattage']);
+        }
+
+        outputObject.altCustomOutput = Math.round10(altFixEff * altMaxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(altBoardMax['inputWattage'], -1) + ' W/ft (fixture)';
+        outputObject.altCustomProg = Math.round10(altBoardMax['boardWattage'], -1) + ' W/ft (board) @ ' + Number(altBoardMax['mA']) + ' mA/ft';
+
+      };
+    });
+
+    outputObject.customOutput = Math.round10(fixEff * maxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMax['inputWattage'], -1) + ' W/ft (fixture)';
+    outputObject.customProg = Math.round10(boardMax['boardWattage'], -1) + ' W/ft (board) @ ' + Number(boardMax['mA']) + ' mA/ft';
+
+  } else {
+    var boardCount = fixBoardCounts[fixObject.fixture];
+    var altBoardCount = fixBoardCounts[fixObject.altFixture];
+    var driverEff;
+    var fixWatt;
+    var totalmA;
+
+    Object.keys(boardData).forEach(function(key) {
+
+      var tempmA = boardCount * Number(boardData[key].mA);
+      var tempDrivEff;
+
+      if (fixObject.boardType === '3') {
+
+        if (tempmA < 2300 && tempmA >= 1458) {
+          tempDrivEff = .8425;
+        } else if (tempmA < 1458 && tempmA >= 1219) {
+          tempDrivEff = .8225;
+        } else if (tempmA < 1219 && tempmA >= 1145) {
+          tempDrivEff = .835;
+        } else if (tempmA < 1145 && tempmA >= 813) {
+          tempDrivEff = .8625;
+        } else if (tempmA < 813 && tempmA >= 673) {
+          tempDrivEff = .845;
+        } else if (tempmA < 673 && tempmA >= 549) {
+          tempDrivEff = .815;
+        } else if (tempmA < 549 && tempmA >= 372) {
+          tempDrivEff = .785;
+        } else if (tempmA < 372 && tempmA >= 279) {
+          tempDrivEff = .7575;
+        } else if (tempmA < 279 && tempmA >= 219) {
+          tempDrivEff = .695;
+        } else if (tempmA < 219 && tempmA >= 189) {
+          tempDrivEff = .6425;
+        } else if (tempmA < 189 && tempmA >= 151) {
+          tempDrivEff = .6025;
+        } else if (tempmA < 151) {
+          tempDrivEff = .568;
+        };
+      } else {
+        var altRelevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) * altBoardCount : Number(boardData[key][fixObject.color]) * altFixEff * altBoardCount;
+
+        if (altRelevantBoardData <= altCustTarget) {
+          altBoardMax = boardData[key];
+        }
+
+        if (tempmA > 2300) {
+          tempmA = tempmA / Math.ceil(fixObject.ul / 50);
+        };
+
+        if (tempmA < 2300 && tempmA >= 1675) {
+          tempDrivEff = .8365;
+        } else if (tempmA < 1675 && tempmA >= 1450) {
+          tempDrivEff = .825;
+        } else if (tempmA < 1450 && tempmA >= 1384) {
+          tempDrivEff = .8175;
+        } else if (tempmA < 1384 && tempmA >= 940) {
+          tempDrivEff = .85;
+        } else if (tempmA < 940 && tempmA >= 751) {
+          tempDrivEff = .828;
+        } else if (tempmA < 751 && tempmA >= 600) {
+          tempDrivEff = .808;
+        } else if (tempmA < 600 && tempmA >= 400) {
+          tempDrivEff = .79;
+        } else if (tempmA < 400 && tempmA >= 350) {
+          tempDrivEff = .76;
+        } else if (tempmA < 350 && tempmA >= 270) {
+          tempDrivEff = .725;
+        } else if (tempmA < 270 && tempmA >= 234) {
+          tempDrivEff = .685;
+        } else if (tempmA < 234 && tempmA >= 199) {
+          tempDrivEff = .65;
+        } else if (tempmA < 199) {
+          tempDrivEff = .60;
+        }
+      }
+
+      var relevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['boardWattage']) / tempDrivEff  * boardCount : Number(boardData[key][fixObject.color]) * fixEff * boardCount;
+
+      if (relevantBoardData <= custTarget) {
+        driverEff = tempDrivEff
+        fixWatt = Number(boardData[key]['boardWattage']) / tempDrivEff  * boardCount;
+        boardMax = boardData[key];
+        totalmA = Number(boardData[key].mA) * boardCount;
+
+        maxBoardLumen = Number(boardMax[fixObject.color]);
+      }
+    });
+
+    // outputObject.max = fixObject.fixture.slice(0,1) === 'F' ? 'Please see spec sheet for max lumens' : Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1) + ' lumens @ ' + Math.round10(fixWatt, -1) + ' watts';
+    // outputObject.min = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1) + ' lumens @ ' + Math.round10(boardMin['inputWattage'] * boardCount, -1) + ' watts';
+    if (altCustTarget) {
+      outputObject.altCustomOutput = Math.round10(altFixEff * Number(altBoardMax[fixObject.color]) * criX * altBoardCount, 1) + ' lumens @ ' + Math.round10(altBoardMax['inputWattage'] * altBoardCount, -1) + ' watts (fixture)';
+      outputObject.altCustomProg = Math.round10(altBoardMax['boardWattage'] * altBoardCount, -1) + ' watts (board) @ ' + Number(altBoardMax['mA']) * altBoardCount + ' mA';
+    }
+
+    outputObject.customOutput = Math.round10(fixEff * maxBoardLumen * criX * boardCount, 1) + ' lumens @ ' + Math.round10(boardMax['boardWattage'] / driverEff * boardCount, -1) + ' watts (fixture)';
+    outputObject.customProg = Math.round10(boardMax['boardWattage'] * boardCount, -1) + ' watts (board) @ ' + Number(boardMax['mA']) * boardCount + ' mA';
+
+  };
 
   return outputObject;
 };

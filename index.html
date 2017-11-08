@@ -3,6 +3,8 @@
   <head>
     <meta charset=utf-8>
     <title>Lumen Min&Max by Ryan</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="skeleton.css">
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -31,12 +33,30 @@
         </div>
         <div class="color">
         </div>
+        <div class="switch">
+          <label class="black-text">
+            Lumens
+            <input id="unitSwitch" class="" type="checkbox">
+            <span class="lever"></span>
+            Watts
+          </label>
+        </div>
+        <div class="input-field customInput">
+          <label class="customTarget" for="customTarget">Custom Lumens (optional):</label>
+          <input id="customTarget" type="number" class="validate" step="any" min="1">
+        </div>
+        <div class="input-field customInput2">
+          <label class="customTarget2" for="customTarget2">Custom Lumens (optional):</label>
+          <input id="customTarget2" type="number" class="validate" step="any" min="1">
+        </div>
+        <button class="clButton">Add CL</button>
       </article>
       <article class="output four columns">
       </article>
     </section></code>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://fastcdn.org/Papa-Parse/4.1.2/papaparse.min.js"></script>
 
     <script type="text/javascript" src="csvStrings.js"></script>

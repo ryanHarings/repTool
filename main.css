@@ -21,8 +21,12 @@ article > p:first-child, div > p:first-child {
   padding-bottom: 10px;
 }
 
-.color, .shielding > .second {
+.color, .shielding > .second, .switch {
   padding-top: 30px;
+}
+
+.switch {
+  padding-bottom: 5px;
 }
 
 button {
@@ -31,7 +35,27 @@ button {
   border-color: black;
 }
 
+.outputCard {
+  /*background-color: grey;*/
+}
+
+.customProg, .altCustomMessage, .altCustomProg {
+  padding-left: 122px;
+}
+
 /*style and animate CSS*/
+
+input:focus, input {
+  /*outline: none !important;*/
+  /*outline-style: none !important;*/
+  /*box-shadow: none !important;*/
+  border-color: transparent !important;
+  /*border: solid 2px transparent !important;*/
+}
+
+input {
+  border-bottom: solid 1px grey !important;
+}
 
 @keyframes cursor {
     from {background-color: black;}
@@ -58,3 +82,47 @@ button:hover {
   background-color: black;
   color: white;
 }
+
+.outputCard {
+  border-bottom: 3px solid black;
+}
+
+/* materialize styling */
+
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=number]:focus + label {
+    color: #000;
+  }
+  /* label underline focus color */
+  .input-field input[type=number]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* valid color */
+  .input-field input[type=number].valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* invalid color */
+  /*.input-field input[type=number].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }*/
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #000;
+  }
+
+  .switch label input[type=checkbox]:checked+.lever {
+    background-color: grey;
+  }
+
+  .switch label input[type=checkbox]:checked+.lever:after {
+    background-color: black;
+  }
+
+/* */
