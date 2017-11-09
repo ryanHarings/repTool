@@ -280,13 +280,20 @@ function getOutput(fixObject) {
 
   if (fixObject.family === 'LIN') {
 
+    var crappyL6A35workaroud;
+
     Object.keys(boardData).forEach(function(key) {
+      if (Number(boardData[key].mA) === 350) {
+        crappyL6A35workaroud = boardData[key]
+      }
       if (Number(boardData[key].inputWattage) < Number(fixObject.ul)) {
         boardMax = boardData[key];
         maxBoardLumen = Number(boardMax[fixObject.color]);
         minBoardLumen = Number(boardMin[fixObject.color]);
       }
     });
+
+    // if ()
 
     if (fixObject.altFixture) {
       altWatts = Number(fixObject.ul) - Number(boardMax['inputWattage']);
@@ -416,7 +423,7 @@ function getCustomOutput(fixObject) {
   var altCustTarget = Number(fixObject.altCustomTarget);
   var custUnit = fixObject.customUnit;
 
-  var boardMax;
+  var boardMax = boardData[0];
   var maxBoardLumen;
 
   var outputObject = {};
@@ -433,12 +440,12 @@ function getCustomOutput(fixObject) {
       var relevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) : Number(boardData[key][fixObject.color]) * fixEff * criX;
       var altRelevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) : Number(boardData[key][fixObject.color]) * altFixEff * criX;
       if (relevantBoardData <= custTarget) {
-        boardMax = boardData[key];
+        boardMax = custUnit === 'Lumens' ? boardData[Number(key) + 1] : boardData[key];
         maxBoardLumen = Number(boardMax[fixObject.color]);
       }
       if (fixObject.altCustomTarget) {
         if (altRelevantBoardData <= altCustTarget) {
-          altBoardMax = boardData[key];
+          altBoardMax = custUnit === 'Lumens' ? boardData[Number(key) + 1] : boardData[key];
           altMaxBoardLumen = Number(altBoardMax[fixObject.color]);
           altInputWatts = Number(altBoardMax['inputWattage']);
           altOutputWatts = Number(altBoardMax['outputWattage']);
@@ -496,7 +503,7 @@ function getCustomOutput(fixObject) {
         var altRelevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['inputWattage']) * altBoardCount : Number(boardData[key][fixObject.color]) * altFixEff * altBoardCount * criX;
 
         if (altRelevantBoardData <= altCustTarget) {
-          altBoardMax = boardData[key];
+          altBoardMax = custUnit === 'Lumens' ? boardData[Number(key) + 1] : boardData[key];
         }
 
         if (tempmA > 2300) {
@@ -532,10 +539,10 @@ function getCustomOutput(fixObject) {
 
       var relevantBoardData = custUnit === 'Watts' ? Number(boardData[key]['boardWattage']) / tempDrivEff  * boardCount : Number(boardData[key][fixObject.color]) * fixEff * boardCount * criX;
 
-      if (relevantBoardData <= custTarget || boardMax === undefined) {
+      if (relevantBoardData <= custTarget) {
         driverEff = tempDrivEff
         fixWatt = Number(boardData[key]['boardWattage']) / tempDrivEff  * boardCount;
-        boardMax = boardData[key];
+        boardMax = custUnit === 'Lumens' ? boardData[Number(key) + 1] : boardData[key];
         totalmA = Number(boardData[key].mA) * boardCount;
 
         maxBoardLumen = Number(boardMax[fixObject.color]);
