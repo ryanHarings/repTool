@@ -552,14 +552,14 @@ function getCustomOutput(fixObject) {
     // outputObject.max = fixObject.fixture.slice(0,1) === 'F' ? 'Please see spec sheet for max lumens' : Math.round10(maxBoardLumen * boardCount * criX * fixEff, 1) + ' lumens @ ' + Math.round10(fixWatt, -1) + ' watts';
     // outputObject.min = Math.round10(fixEff * minBoardLumen * boardCount * criX, 1) + ' lumens @ ' + Math.round10(boardMin['inputWattage'] * boardCount, -1) + ' watts';
     if (altCustTarget) {
-      outputObject.altCustomOutput = Math.round10(altFixEff * Number(altBoardMax[fixObject.color]) * criX * altBoardCount, 1) + ' lumens @ ' + Math.round10(altBoardMax['inputWattage'] * altBoardCount, -1) + ' watts (fixture)';
-      outputObject.altCustomProg = Math.round10(altBoardMax['boardWattage'] * altBoardCount, -1) + ' watts (board) @ ' + Number(altBoardMax['mA']) * altBoardCount + ' mA';
+      outputObject.altCustomOutput = Math.round10(altFixEff * Number(altBoardMax[fixObject.color]) * criX * altBoardCount, 1) + ' lumens @ ' + Math.round10(altBoardMax['inputWattage'] * altBoardCount, -1) + ' watts (fixture) total';
+      outputObject.altCustomProg = Math.round10(altBoardMax['boardWattage'] * altBoardCount, -1) + ' watts (board) @ ' + Number(altBoardMax['mA']) * altBoardCount + ' mA total';
     };
 
     var customWattage = Number(boardMax['mA']) === 50 ? fixObject.minWatts : Math.round10(boardMax['boardWattage'] / driverEff * boardCount, -1);
 
-    outputObject.customOutput = Math.round10(fixEff * maxBoardLumen * boardCount * criX, 1) + ' lumens @ ' + customWattage + ' watts (fixture)';
-    outputObject.customProg = Math.round10(boardMax['boardWattage'] * boardCount, -1) + ' watts (board) @ ' + Number(boardMax['mA']) * boardCount + ' mA';
+    outputObject.customOutput = Math.round10(fixEff * maxBoardLumen * boardCount * criX, 1) + ' lumens @ ' + customWattage + ' watts (fixture) total';
+    outputObject.customProg = Math.round10(boardMax['boardWattage'] * boardCount, -1) + ' watts (board) @ ' + Number(boardMax['mA']) * boardCount + ' mA total';
 
   };
 
