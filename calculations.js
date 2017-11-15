@@ -310,10 +310,10 @@ function getOutput(fixObject) {
     };
 
     outputObject.catalog = fixObject.fixture + ' ' + shieldCheck + ' ' + fixObject.cri + ' ' + fixObject.color;
-    outputObject.max = Math.round10(fixEff * maxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMax['inputWattage'], -1) + ' W/ft';
-    outputObject.min = Math.round10(fixEff * minBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMin['inputWattage'], -1) + ' W/ft';
-    outputObject.maxLumens = Math.round10(fixEff * maxBoardLumen * criX, 1);
-    outputObject.minLumens = Math.round10(fixEff * minBoardLumen * criX, 1);
+    outputObject.max = Math.floor10(fixEff * maxBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMax['inputWattage'], -1) + ' W/ft';
+    outputObject.min = Math.ceil10(fixEff * minBoardLumen * criX, 1) + ' lm/ft @ ' + Math.round10(boardMin['inputWattage'], -1) + ' W/ft';
+    outputObject.maxLumens = Math.floor10(fixEff * maxBoardLumen * criX, 1);
+    outputObject.minLumens = Math.ceil10(fixEff * minBoardLumen * criX, 1);
     outputObject.maxWatts = Math.round10(boardMax['inputWattage'], -1);
     outputObject.minWatts = Math.round10(boardMin['inputWattage'], -1);
 
