@@ -2,7 +2,7 @@
 
 body {
   max-height: 100%;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .mainMenu {
@@ -17,50 +17,72 @@ body {
 }
 
 .secondaryUl {
-  height:4em;
+  height:4.5em;
   overflow:hidden;
   overflow-y:scroll;
 }
 
+.header {
+  font-size: 2em;
+  font-weight: bold;
+  border-top: solid 2px #0277bd;
+  border-right: solid 5px #0277bd;
+  border-top-right-radius: .5em;
+}
+
+.subHeader {
+  font-size: 1.5em;
+  padding: -30px;
+}
+
+.secondaryUl {
+  text-align: center;
+  width: 10em;
+  /*background-color: #64b5f6;*/
+  /*color: white;*/
+  padding-left: 20em;
+  border-radius: .5em;
+  margin-bottom: 1em;
+  border-bottom: solid 2px #0277bd;
+  border-left: solid 5px #0277bd;
+  border-bottom-left-radius: .5em;
+}
 
 /*style and animate CSS*/
 
-input:focus, input {
-  /*outline: none !important;*/
-  /*outline-style: none !important;*/
-  /*box-shadow: none !important;*/
-  border-color: transparent !important;
-  /*border: solid 2px transparent !important;*/
+.marketMain, .repMain, .mfgMain {
+  /*background-color: #0277bd;*/
+  color: #0277bd;
+  border: solid 2px #0277bd;
+  border-radius: .5em;
 }
 
-input {
-  border-bottom: solid 1px grey !important;
+nav {
+  border-radius: .5em;
 }
 
 @keyframes cursor {
-    from {background-color: black;}
+    from {background-color: #0277bd;}
     to {background-color: white;}
     from {background-color: white;}
-    to {background-color: black;}
+    to {background-color: #0277bd;}
 }
 
-.hover:hover {
-  background-color: black;
+.marketMain:hover, .repMain:hover, .mfgMain:hover {
+  background-color: #0277bd;
   color: white;
-  animation-name: cursor;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-button:hover {
-  background-color: black;
-  color: white;
+  border-color: white;
 }
 
 .selected {
-  background-color: black;
+  background-color: #0277bd;
   color: white;
+  border-color: white;
+}
+
+.primaryUl {
+  color: #0277bd;
+  font-size: 2em;
 }
 
 /* materialize styling */

@@ -32,21 +32,28 @@ createLists();
 // console.log(manufacturersList);
 
 $('.marketMain').click(function() {
+  $('.mainMenu').children().removeClass('selected');
+  $('.marketMain').addClass('selected');
   $('.primaryUl').empty();
   marketRegionsList.forEach(primaryListAppend('mark'))
 });
 
 $('.repMain').click(function() {
+  $('.mainMenu').children().removeClass('selected');
+  $('.repMain').addClass('selected');
   $('.primaryUl').empty();
   repAgenciesList.forEach(primaryListAppend('rep'))
 });
 
 $('.mfgMain').click(function() {
+  $('.mainMenu').children().removeClass('selected');
+  $('.mfgMain').addClass('selected');
   $('.primaryUl').empty();
   manufacturersList.forEach(primaryListAppend('mfg'))
 });
 
 $('#search').keyup(() => {
+  $('.mainMenu').children().removeClass('selected');
   searchInputTracker = ($('#search').val());
   if (searchInputTracker.length > 0) {
     $('.primaryUl').empty();
@@ -68,6 +75,10 @@ $('#search').keyup(() => {
     searchRepList.forEach(primaryListAppend('rep'));
     searchMfgList.forEach(primaryListAppend('mfg'));
   }
+});
+
+$('.clear').click(function() {
+  $('#search').val('');
 });
 
 function searchFilter(input) {
@@ -106,7 +117,7 @@ $('.primaryUl').on('click', '.primaryLi', function() {
 function repCard(selectionOutput) {
   $('.primaryUl').append('<li class="header secondaryLi">'+ selectionOutput + ' - '+ repInfo[selectionOutput].rank +'</li>');
   $('.primaryUl').append('<li class="subHeader secondaryLi">'+ repInfo[selectionOutput].market +'</li>');
-  $('.primaryUl').append('<li class="conglomerate secondaryLi">'+ repInfo[selectionOutput].conglomerate +'</li>');
+  $('.primaryUl').append('<li class="conglomerate secondaryLi">Conglomerate: '+ repInfo[selectionOutput].conglomerate +'</li>');
   $('.primaryUl').append('<li class="lines secondaryLi"><ul class="lineCard secondaryUl"></ul></li>');
   repInfo[selectionOutput].manufacturers.forEach(function(manu) {
     $('.lineCard').append('<li class="lines secondaryLi">'+ manu +'</li>');
