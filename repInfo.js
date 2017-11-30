@@ -34,5 +34,690 @@ const repInfo = {
     manufacturers: [],
     rank: 2,
     market: 'Alaska'
-  }
+  },
+  'AMA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market:'Alabama:Birmingham'
+
+  },
+  'AMA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market:'Alabama:Mobile'
+
+  },
+  'Alaska Architectural Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market:'Alaska'
+
+  },
+  'Arizona Lighting Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market:'Arizona'
+
+  },
+  'Gildner Maddox': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Arkansas'
+
+  },
+  '16500': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'California:Bay Area'
+
+  },
+  'C.B.C. Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'California:Fresno'
+
+  },
+  'Performance Lighting Systems': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:8,
+    market: 'California:Los Angeles'
+
+  },
+  'C.J.S. Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'California:Sacramento'
+
+  },
+  'SDLA': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'California:San Diego'
+
+  },
+  'Performance Lighting Systems': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:10,
+    market: 'California:Ventura'
+
+  },
+  'The MH Companies': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Colorado'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Connecticut'
+
+  },
+  'Diversified Lighting Assoc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Delaware'
+
+  },
+  'Envision Lighting Systems': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Florida:Fort Meyers'
+
+  },
+  'Architectural Sales & Illumination': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Florida:Jacksonville'
+
+  },
+  'Landreth': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Florida:Orlando'
+
+  },
+  'AMA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Florida:Panhandle'
+
+  },
+  'Envision Lighting Systems': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Florida:Tampa'
+
+  },
+  'Smart Lighting Solutions': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Georgia:Atlanta'
+
+  },
+  'Architectural Sales & Illumination': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Georgia:Savannah'
+
+  },
+  "Klopfenstein's": {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Hawaii'
+
+  },
+  'Cascade Lighting Representatives': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Idaho'
+
+  },
+  'KSA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Illinois:Central'
+
+  },
+  'KSA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Illinois:Chicago'
+
+  },
+  'Light Source': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Indiana'
+
+  },
+  'NRG Sales ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Iowa'
+
+  },
+  'Premier Lighting & Controls': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Kansas'
+
+  },
+  'LHI Lighting Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Kentucky'
+
+  },
+  'Professional Lighting Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:7,
+    market: 'Louisiana:Baton Rouge'
+
+  },
+  'Bell & McCoy Lighting and Controls': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Louisiana:New Orleans'
+
+  },
+  'Curtis Stout, Inc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Louisiana:Shreveport'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:7,
+    market: 'Maine'
+
+  },
+  'Ambiance Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Maryland'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Massachusetts:Boston'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Massachusetts:Springfield'
+
+  },
+  'Resource Lighting Group': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Michigan:Detroit'
+
+  },
+  'Western Michigan Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Michigan:Grand Rapids'
+
+  },
+  'JTH Lighting Alliance': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Minnesota'
+
+  },
+  'AMA Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:7,
+    market: 'Mississippi'
+
+  },
+  'Premier Lighting & Controls': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Missouri:Kansas City'
+
+  },
+  'St. Louis Lighting Group': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Missouri:St. Louis'
+
+  },
+  'Cascade Lighting Representatives': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Montana'
+
+  },
+  'Central Sales Co.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Nebraska'
+
+  },
+  'Nevada Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Nevada:Las Vegas'
+
+  },
+  'Nevada Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Nevada:Reno'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:7,
+    market: 'New Hampshire'
+
+  },
+  'Electric Lighting Agencies': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'New Jersey:Northern'
+
+  },
+  'Diversified Lighting Assoc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'New Jersey:Southern'
+
+  },
+  'I.W. Inc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'New Mexico'
+
+  },
+  'Electric Lighting Agencies': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'New York:NYC'
+
+  },
+  'Vertex Solutions': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'New York:Upstate'
+
+  },
+  'T.E.A.M. Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'North Carolina:Charlotte'
+
+  },
+  'T.E.A.M. Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'North Carolina:Greensboro'
+
+  },
+  'T.E.A.M. Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'North Carolina:Raleigh'
+
+  },
+  'JTH Lighting Alliance': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'North Dakota'
+
+  },
+  'Leesman Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Ohio:Cincinnati'
+
+  },
+  'Myriad Energy Solutions': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Ohio:Cleveland'
+
+  },
+  'Bright Focus Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Ohio:Columbus'
+
+  },
+  'Resource Lighting Group': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:5,
+    market: 'Ohio:Toledo'
+
+  },
+  'Triple C Lighting & Controls ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Oklahoma:OKC'
+
+  },
+  'Triple C Lighting & Controls ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Oklahoma:Tulsa'
+
+  },
+  'Malcar Northwest': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Oregon'
+
+  },
+  'Diversified Lighting Assoc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Pennsylvania:Philadelphia'
+
+  },
+  'REPCO II': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Pennsylvania:Pittsburg'
+
+  },
+  'ESS Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'Rhode Island'
+
+  },
+  'The Schneider Company': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'South Carolina'
+
+  },
+  'JTH Lighting Alliance': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:6,
+    market: 'South Dakota'
+
+  },
+  'CELECO ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:8,
+    market: 'Tennessee:Chattanooga'
+
+  },
+  'Lighting Trends': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Tennessee:Knoxville'
+
+  },
+  'Spectrum Lighting + Controls': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Tennessee:Memphis'
+
+  },
+  'Designlight': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Tennessee:Nashville'
+
+  },
+  'Hossley Lighting Assoc. ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Texas:Austin'
+
+  },
+  'Hossley Lighting Assoc. ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Texas:Dallas'
+
+  },
+  'I.W. Inc.': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Texas:El Paso'
+
+  },
+  'CW Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Texas:Houston'
+
+  },
+  'Hossley Lighting Assoc. ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Texas:San Antonio'
+
+  },
+  'Steven Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Utah'
+
+  },
+  'Apex Lighting Solutions': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Vermont'
+
+  },
+  'Old Dominion Lighting ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Virginia:Norfolf'
+
+  },
+  'Old Dominion Lighting ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Virginia:Richmond'
+
+  },
+  'Old Dominion Lighting ': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Virginia:Roanoke'
+
+  },
+  'SeaTac Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Washington:Seattle'
+
+  },
+  'SeaTac Lighting': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Washington:Spokane'
+
+  },
+  'REPCO II': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'West Virginia'
+
+  },
+  'Spectrum Lighting + Controls': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Wisconsin'
+
+  },
+  'The MH Companies': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Wyoming'
+
+  },
+  'Optics Lighting Agency': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Alberta:Calgary'
+
+  },
+  'Optics Lighting Agency': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Alberta:Edmonton'
+
+  },
+  'Inter-Lite Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'British Columbia'
+
+  },
+  'R.D. Sales': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Manitoba'
+
+  },
+  'CSA Enterprises': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Newfoundland'
+
+  },
+  'CSA Enterprises': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Nova Scotia'
+
+  },
+  'Aland Enterprises': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:3,
+    market: 'Ontario:Ottawa'
+
+  },
+  'Omnilumen Technical Products': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:4,
+    market: 'Ontario:Toronto'
+
+  },
+  'Lumigroup': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Quebec:Montreal'
+
+  },
+  'Lumigroup': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:1,
+    market: 'Quebec:Quebec City'
+
+  },
+  'Titan Marketing Solutions': {
+    conglomerate: '',
+    manufacturers: [],
+    rank:2,
+    market: 'Saskatchewan'
+  },
 };

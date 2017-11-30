@@ -42,22 +42,21 @@ body {
   font-weight: lighter;
 }
 
-.conglomerate, .lines {
+.conglomerate, .lines, .subHeader {
   font-weight: lighter;
   text-align: left;
+}
+
+.subHeader:first-child {
+  font-weight: normal;
 }
 
 .secondaryUl {
   text-align: center;
   width: 10em;
-  /*background-color: #64b5f6;*/
-  /*color: white;*/
   padding-left: 20em;
   border-radius: .5em;
   margin-bottom: 1em;
-  /*border-bottom: solid 2px #0277bd;*/
-  /*border-left: solid 5px #0277bd;*/
-  /*border-bottom-left-radius: .5em;*/
 }
 
 /*style and animate CSS*/
