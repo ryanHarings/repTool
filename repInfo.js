@@ -87,7 +87,7 @@ const repInfo = {
   'One Source Lighting': {
     conglomerate: '',
     manufacturers: [],
-    rank:2,
+    rank:5,
     market: 'California:Bay Area'
 
   },
