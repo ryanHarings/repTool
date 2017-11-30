@@ -49,13 +49,6 @@ const repInfo = {
     market:'Alabama:Mobile'
 
   },
-  'Alaska Architectural Lighting': {
-    conglomerate: '',
-    manufacturers: [],
-    rank:1,
-    market:'Alaska'
-
-  },
   'Arizona Lighting Sales': {
     conglomerate: '',
     manufacturers: [],
@@ -63,14 +56,35 @@ const repInfo = {
     market:'Arizona'
 
   },
-  'Gildner Maddox': {
-    conglomerate: '',
-    manufacturers: [],
-    rank:5,
-    market: 'Arkansas'
+  '16500': {
+    conglomerate: 'Acuity',
+    manufacturers: ['3G Lighting','Acclaim Lighting','Active Safety','Acuity','Aculux','Advent Architectural Lighting','Antique Street Lamps/Acuity','Arborlight','AZZ (formerly Rigalite)','Bartco Lighting','Beghelli Group','Beta-Calco','Blackjack','BYIBA','Celestial Lighting','Dark','Dark to Light/Acuity','Delray Lighting','DW Windsor','Easyl™/Acuity','EcoSense Lighting','Edge Lighting','ELEMENT by Tech Lighting','Energie','Energy Focus','ERCO','Fabbian Illuminazione','Feiss','Gotham/Acuity','Healthcare Lighting®/Acuity','Heilux','HUNT Dimming','HYDREL/Acuity','ILUMINARC®','Indy Lighting','Intrigue Lighting','ISAAC+RAE','Juno Lighting','Ketra','L.C. Doane','LBL Lighting','Lightahome Residential/Acuity','Lighting Control & Design (LC&D)/Acuity','Lighting Services Inc','Lightology','LIGMAN Lighting USA','Lithonia Lighting/Acuity','LLI Architectural Lighting','LucaLight','LumenArt','Luminaire LED','Lumium Lighting','Lumux','Mark Architectural Lighting/Acuity','Modern Forms','Monte Carlo Fan Company','Neri','NexLight','Nine 24 Inc.','NIPPO-Seamlessline-Verbatim','nLIGHT/Acuity','OCL Architectural Lighting','OLED/Acuity','Optic Arts','Pace Illumination','Peachtree Lighting','Peerless/Acuity','Pinnacle','Poles Central/Acuity','Prudential Lighting','Pure Lighting','Ragni Company','RELOC® Wiring Solutions/Acuity','ROAM®/Acuity','Saco','Selux','Sensor Switch/Acuity','SLV Lighting NA','SpecGrade LED','Specialized Lighting Solutions (SLS)','SPI Lighting Inc.','Stile Contemporary Lighting','Sunoptics Prismatic Skylights/Acuity','Synergy Lighting Controls/Acuity','Tech Lighting','TENMAT','TLI Teron Lighting','United Lighting Standards','USAI Lighting','Vision 3 Lighting','VISO','Volt Lighting Group','Waldmann','Winona/Acuity'],
+    rank:2,
+    market: 'California:Bay Area'
 
   },
-  '16500': {
+  'ALR': {
+    conglomerate: 'Philips',
+    manufacturers: [],
+    rank:1,
+    market: 'California:Bay Area'
+
+  },
+  'CAL Lighting': {
+    conglomerate: 'Eaton',
+    manufacturers: [],
+    rank:3,
+    market: 'California:Bay Area'
+
+  },
+  'Lighting Systems': {
+    conglomerate: 'Hubbel',
+    manufacturers: [],
+    rank:4,
+    market: 'California:Bay Area'
+
+  },
+  'One Source Lighting': {
     conglomerate: '',
     manufacturers: [],
     rank:2,
