@@ -1,7 +1,10 @@
 /*main look*/
 
-ul{height:100px;}
-ul{overflow:hidden; overflow-y:scroll;}
+.primaryUl{height:100px;}
+.primaryUl{overflow:hidden; overflow-y:scroll;}
+
+.secondaryUl{height:50px;}
+.secondaryUl{overflow:hidden; overflow-y:scroll;}
 /*
 body {
   background-color: white;
