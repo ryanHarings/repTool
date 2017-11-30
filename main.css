@@ -1,14 +1,8 @@
 /*main look*/
-
+/*
 body {
   background-color: white;
   color: #black;
-}
-
-code {
-  background-color: white;
-  border: 1px solid white;
-
 }
 
 .fixtures, .shielding, .led, .output {
@@ -86,7 +80,7 @@ button:hover {
 .outputCard {
   border-bottom: 3px solid black;
 }
-
+*/
 /* materialize styling */
 
   /* label color */
