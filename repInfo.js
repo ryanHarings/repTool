@@ -1,7 +1,7 @@
 const repInfo = {
   'Lighting & Power Solutions': {
     conglomerate: 'Hubbel',
-    manufacturers: ['Focal Point','Wattstopper','Zumtobel'],
+    manufacturers: ['Focalpoint','Wattstopper','Zumtobel'],
     rank: 1,
     market: 'Arkansas'
   },
