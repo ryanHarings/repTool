@@ -1,42 +1,3 @@
-var repInfo = {
-  'Lighting & Power Solutions': {
-    conglomerate: 'Hubbel',
-    manufacturers: ['Focal Point','Wattstopper','Zumtobel'],
-    rank: 1,
-    market: 'Arkansas'
-  },
-  'Curtis Stout, Inc.': {
-    conglomerate: 'Cree',
-    manufacturers: ['Lutron','Prudential','Finelite','Lumenpulse'],
-    rank: 2,
-    market: 'Arkansas'
-  },
-  'Long Sales Agency': {
-    conglomerate: 'Acuity',
-    manufacturers: [],
-    rank: 3,
-    market: 'Arkansas'
-  },
-  'Malmstrom White Co.': {
-    conglomerate: 'Eaton',
-    manufacturers: [],
-    rank: 4,
-    market: 'Arkansas'
-  },
-  'Alaska Architectural Lighting': {
-    conglomerate: 'Acuity',
-    manufacturers: ['Prudential','Pinnacle','Zumtobel'],
-    rank: 1,
-    market: 'Alaska'
-  },
-  'Klondike Sales': {
-    conglomerate: 'Eaton',
-    manufacturers: [],
-    rank: 2,
-    market: 'Alaska'
-  }
-};
-
 const marketRegionsList = [];
 // const marketRegionsList = ['~'];
 const repAgenciesList = [];
@@ -107,7 +68,6 @@ $('#search').keyup(() => {
     searchRepList.forEach(primaryListAppend('rep'));
     searchMfgList.forEach(primaryListAppend('mfg'));
   }
-
 });
 
 function searchFilter(input) {
@@ -147,70 +107,8 @@ function repCard(selectionOutput) {
   $('.primaryUl').append('<li class="header secondaryLi">'+ selectionOutput + ' - '+ repInfo[selectionOutput].rank +'</li>');
   $('.primaryUl').append('<li class="subHeader secondaryLi">'+ repInfo[selectionOutput].market +'</li>');
   $('.primaryUl').append('<li class="conglomerate secondaryLi">'+ repInfo[selectionOutput].conglomerate +'</li>');
-  $('.primaryUl').append('<li class="lines secondaryLi"><ul class="lineCard"></ul></li>');
+  $('.primaryUl').append('<li class="lines secondaryLi"><ul class="lineCard secondaryUl"></ul></li>');
   repInfo[selectionOutput].manufacturers.forEach(function(manu) {
     $('.lineCard').append('<li class="lines secondaryLi">'+ manu +'</li>');
   })
 };
-
-//
-//
-// function createList(effObject) {
-//   $('.switch').hide();
-// };
-//
-// createList(fixEff);
-//
-// var selection = {};
-// var clickCount = 0;
-//
-// $('.lever').click(function() {
-//   $("#unitSwitch").prop("checked") === false) {
-//   var butUnit = selection.customUnit === 'Lumens' ? 'L' : 'W';
-//   $('.clButton').text('Add C' + butUnit);
-// });
-//
-// $('button.clButton').click(function() {
-//   selection.customTarget = $('#customTarget').val();
-//   $('#customTarget').val([]);
-//   var unitMaxSelection = eval('selection.max' + selection.customUnit);
-//
-//     $('.' + buttonNum + ' .customMessage span').text('');
-//     $('.temp').removeClass('selected');
-// });
-//
-// $('.fixture').click(function(){
-//   selection = {};
-//   selection.customUnit = $("#unitSwitch").prop("checked") === true ? 'Watts' : 'Lumens';
-//   $('#customTarget').val([]);
-//   $('.shielding > .first').empty();
-//   $('.shielding').prepend('<p>Shielding</p>');
-//   $(this).addClass('selected');
-//   selection.boardType = $(this).attr('value');
-//
-//   $('.lens').click(function() {
-//     // document.getElementById("unitSwitch").checked = false;
-//
-//     $(this).siblings().removeClass('selected');
-//
-//     $('.altLens').click(function() {
-//
-//     });
-//
-//     $('div.board').on('click', '.cri', function() {
-//
-//       // document.getElementById("unitSwitch").checked = false;
-//       $('.color').append('<div class="temp hover" name="50k">50K</div>');
-//
-//       $('.temp').click(function() {
-//
-//         $('.switch').show();
-//
-//         buttonNum = 'btn' + clickCount;
-//
-//         $('.output').append('<div class="' + buttonNum + ' outputCard"></div>');
-//
-//       });
-//     });
-//   });
-// });

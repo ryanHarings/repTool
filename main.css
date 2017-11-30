@@ -1,47 +1,27 @@
 /*main look*/
 
-.primaryUl{height:100px;}
-.primaryUl{overflow:hidden; overflow-y:scroll;}
-
-.secondaryUl{height:50px;}
-.secondaryUl{overflow:hidden; overflow-y:scroll;}
-/*
 body {
-  background-color: white;
-  color: #black;
+  max-height: 100%;
+  text-align: center;
 }
 
-.fixtures, .shielding, .led, .output {
-  border-left: 3px solid black;
-  padding: 15px;
+.mainMenu {
+  font-size: 2em;
 }
 
-article > p:first-child, div > p:first-child {
-  border-bottom: 1px solid black;
-  padding-bottom: 10px;
+.primaryUl {
+  min-height:20em;
+  max-height:100%;
+  overflow:hidden;
+  overflow-y:scroll;
 }
 
-.color, .shielding > .second, .switch {
-  padding-top: 30px;
+.secondaryUl {
+  height:4em;
+  overflow:hidden;
+  overflow-y:scroll;
 }
 
-.switch {
-  padding-bottom: 5px;
-}
-
-button {
-  background-color: white;
-  color: #black;
-  border-color: black;
-}
-
-.outputCard {
-  /*background-color: grey;*/
-}
-
-.customProg, .altCustomMessage, .altCustomProg {
-  padding-left: 122px;
-}
 
 /*style and animate CSS*/
 
@@ -83,10 +63,6 @@ button:hover {
   color: white;
 }
 
-.outputCard {
-  border-bottom: 3px solid black;
-}
-*/
 /* materialize styling */
 
   /* label color */
